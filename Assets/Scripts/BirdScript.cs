@@ -40,7 +40,7 @@ public class BirdScript : MonoBehaviour
 
         // Update the Bird Vertical Velocity by Input Key Down
 
-        if (Input.GetKeyDown(KeyCode.W))
+        if (Input.GetKeyDown(KeyCode.Space))
         {
             birdRig.velocity = Vector2.up * upperMovement; 
 
