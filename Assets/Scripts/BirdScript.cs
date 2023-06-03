@@ -11,6 +11,7 @@ public class BirdScript : MonoBehaviour
     {
         gameObject.name = "Retarded Bird ^^ ";
         
+        
     }
 
     // Update is called once per frame
