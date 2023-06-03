@@ -17,9 +17,7 @@ public class BirdScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        gameObject.name = "Bird Character";
-
-
+       
         // Update Gravity Scale on BeginPlay 
         setGravityScale();
 
@@ -44,7 +42,8 @@ public class BirdScript : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.W))
         {
-            birdRig.velocity = Vector2.up * upperMovement;
+            birdRig.velocity = Vector2.up * upperMovement; 
+
         }
 
 
