@@ -5,33 +5,13 @@ using UnityEngine;
 
 public class PipeDestroyerScript : MonoBehaviour
 {
-
-    //  public Collider2D Collision;
-    // Start is called before the first frame update
-    void Start()
+    void OnTriggerEnter2D(Collider2D Collision)
     {
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        //  Debug.Log("Test");
-    }
-
-
-
-    void OnTriggerEnter2D(Collider2D col)
-    {
-
-
-
-    }
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-
-        Debug.Log("collision name = " + collision.gameObject.name);
-        Destroy(collision.gameObject);
-
+        Debug.Log(Collision.gameObject.name); // Print the name of the collided game object for debugging purposes
+        
+        if (Collision.gameObject.name == "Pipe(Clone)")
+        {
+            Destroy(Collision.gameObject); // Destroy the collided pipe game object
+        }
     }
 }

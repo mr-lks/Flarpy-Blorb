@@ -4,29 +4,19 @@ using UnityEngine;
 
 public class PipeScript : MonoBehaviour
 {
+    public float movementSpeed = 3; // Speed at which the pipe moves
+    public float movementMultipler = 0.001f; // Multiplier for adjusting the movement speed
 
-
-    public float movementSpeed = 3;
-    public float movementMultipler = 0.001f;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
     void Update()
     {
-        PipeMovement();
+        PipeMovement(); // Call the PipeMovement method to move the pipe
     }
 
-    void PipeMovement(){
+    void PipeMovement()
+    {
+        float normalizedMovementSpeed = movementSpeed * movementMultipler; // Calculate the normalized movement speed
 
-        float normalizedMovementSpeed =  movementSpeed*movementMultipler;
-
-        
-        transform.position = transform.position + (Vector3.left * normalizedMovementSpeed)*Time.deltaTime;
-        
-
+        transform.position = transform.position + (Vector3.left * normalizedMovementSpeed) * Time.deltaTime;
+        // Update the position of the pipe by moving it to the left based on the movement speed and deltaTime
     }
 }

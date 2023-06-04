@@ -4,78 +4,59 @@ using UnityEngine;
 
 public class BirdScript : MonoBehaviour
 {
+    public Rigidbody2D birdRig; // Reference to the 2D Rigidbody component of the bird
 
-    // 2D RigidBody Component Reference
-    public Rigidbody2D birdRig;
+    public bool isDead; // Boolean variable to check if the bird is dead
 
-    public bool isDead;
-    // Birds's Gravity Scale 
-    public float gravityScale = 1f;
+    public float gravityScale = 1f; // Bird's gravity scale
+    public float verticalVelocity = 5f; // Bird's vertical movement scale
 
-    // Bird's Vertical Movement Scale 
-    public float verticalVelocity = 5f;
+    public GameManager GM; // Reference to the GameManager script
 
-    public GameManager GameMode;
-
-    // Start is called before the first frame update
     void Start()
     {
-
-        // Update Gravity Scale on BeginPlay 
-        setGravityScale();
-
-
+        setGravityScale(); // Update the gravity scale on start
     }
 
-    // Update is called once per frame
     void Update()
     {
-
-        // Update Bird Vertical Movement on Each Draw Call { Tick }
-
-        moveBird();
-
+        moveBird(); // Update the bird's vertical movement on each frame
     }
 
     void moveBird()
     {
-
-
-        // Update the Bird Vertical Velocity by Input Key Down
-
+        // Update the bird's vertical velocity on input
         if (Input.GetKeyDown(KeyCode.Space))
         {
             birdRig.velocity = Vector2.up * verticalVelocity;
-
         }
-
-
     }
 
     void setGravityScale()
     {
-
-        // Set Bird's Gravity Scale
-        birdRig.gravityScale = gravityScale;
-
+        birdRig.gravityScale = gravityScale; // Set the bird's gravity scale
     }
 
     void setLocalPosition()
     {
-
-        // Set the bird's transform to the bird's transform
-        transform.position = transform.localPosition;
+        transform.position = transform.localPosition; // Set the bird's local position to its transform position
     }
 
     private void OnTriggerEnter2D(Collider2D Collision)
     {
-
         if (Collision.gameObject.name == "ScoreArea")
         {
-
-            GameMode.UpdateScore();
+            GM.UpdateScore(); // Call the UpdateScore method in the GameManager when the bird collides with the score area
         }
+    }
 
-
+    private void OnCollisionEnter2D(Collision2D Collision)
+    {
+        if (Collision.gameObject.tag == "DeathArea")
+        {
+            isDead = true; // Set the bird as dead
+            Time.timeScale = 0; // Freeze the game
+            GM.ShowDeathScreen(); // Call the ShowDeathScreen method in the GameManager to display the death screen
+        }
     }
 }
