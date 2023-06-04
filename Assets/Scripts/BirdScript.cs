@@ -8,16 +8,19 @@ public class BirdScript : MonoBehaviour
     // 2D RigidBody Component Reference
     public Rigidbody2D birdRig;
 
+    public bool isDead;
     // Birds's Gravity Scale 
-    public float gravityScale = 1;
+    public float gravityScale = 1f;
 
     // Bird's Vertical Movement Scale 
-    public float upperMovement = 5;
+    public float verticalVelocity = 5f;
+
+    public GameManager GameMode;
 
     // Start is called before the first frame update
     void Start()
     {
-       
+
         // Update Gravity Scale on BeginPlay 
         setGravityScale();
 
@@ -42,7 +45,7 @@ public class BirdScript : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            birdRig.velocity = Vector2.up * upperMovement; 
+            birdRig.velocity = Vector2.up * verticalVelocity;
 
         }
 
@@ -62,5 +65,17 @@ public class BirdScript : MonoBehaviour
 
         // Set the bird's transform to the bird's transform
         transform.position = transform.localPosition;
+    }
+
+    private void OnTriggerEnter2D(Collider2D Collision)
+    {
+
+        if (Collision.gameObject.name == "ScoreArea")
+        {
+
+            GameMode.UpdateScore();
+        }
+
+
     }
 }

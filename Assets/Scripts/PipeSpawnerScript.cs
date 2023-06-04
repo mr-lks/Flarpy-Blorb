@@ -7,41 +7,37 @@ public class PipeSpawnerScript : MonoBehaviour
 
 
     public GameObject Pipe;
-
+    public BirdScript Bird;
     public float spawnRate = 2.0f;
-    private float timer = 0;
-    public float heightOffset = 10;
+
+    public float heightOffset = 1;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+
+        // Initiate Spawn Enumerator
+        StartCoroutine(SpawnObject());
     }
 
-    // Update is called once per frame
-    void Update()
+
+
+    // Spawn Object In Time Interval 
+    public IEnumerator SpawnObject()
     {
-        if (timer < spawnRate)
+
+
+        while (!Bird.isDead)
         {
-            timer = timer + Time.deltaTime;
+            float lowestPoint = transform.position.y - heightOffset;
+            float highestPoint = transform.position.y + heightOffset;
+
+
+            //Instantiate(Pipe, new Vector3(transform.position.x, Random.Range(lowestPoint, highestPoint), 0), transform.rotation);
+            Instantiate(Pipe, new Vector3(transform.position.x, Random.Range(-heightOffset, heightOffset), 0), transform.rotation);
+            yield return new WaitForSeconds(spawnRate);
         }
-        else
-        {
-            SpawnPipe();
-            timer = 0;
-        }
-      
+
     }
 
-    void SpawnPipe(){
-
-    
-        float lowestPoint = transform.position.y - heightOffset;
-        float highestPoint = transform.position.y + heightOffset;
-
-
-        Instantiate(Pipe, new Vector3(transform.position.x, Random.Range(lowestPoint, highestPoint), 0), transform.rotation);
-
-
-    }
 }

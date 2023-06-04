@@ -6,7 +6,7 @@ public class PipeScript : MonoBehaviour
 {
 
 
-    public float movementSpeed = 5;
+    public float movementSpeed = 3;
     public float movementMultipler = 0.001f;
     // Start is called before the first frame update
     void Start()
